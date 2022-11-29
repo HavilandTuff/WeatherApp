@@ -16,6 +16,7 @@ def get_weather(location):
     weather_json = r.text
     weather_data = json.loads(weather_json)
     if weather_data['cod'] == 200:
+        print(weather_data)
         weather = {'name': weather_data['name'], 'state': weather_data['weather'][0]['description'], 'temp': weather_data['main']['temp']}
     return weather
 
