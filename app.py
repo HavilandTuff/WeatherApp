@@ -2,13 +2,28 @@ import json
 from flask import Flask
 from flask import render_template
 from flask import request
+from flask_sqlalchemy import SQLAlchemy
 import requests
 import sys
 import os
 
 app = Flask(__name__)
 API_KEY = os.getenv('WEATHER_API_KEY')
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///weathers.db"
+db = SQLAlchemy()
+db.init_app(app)
 
+
+class Weather(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    city = db.Column(db.String, unique=True, nullable=False)
+    weather = db.Column(db.String, nullable=False)
+    temp = db.Column(db.Float, nullable=False)
+
+
+with app.app_context():
+    db.create_all()
+    
 
 def get_location_cordinates(location):
     lat = None
