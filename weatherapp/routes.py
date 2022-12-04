@@ -1,6 +1,19 @@
 from flask import render_template
 from flask import request
 from weatherapp import app, api_queries
+from weatherapp.forms import RegistrationForm, LoginForm
+
+@app.route('/login')
+def login():
+    form = LoginForm()
+    return render_template('login.html', form=form)
+
+
+@app.route('/register')
+def register():
+    form = RegistrationForm()
+    return render_template('register.html', form=form)
+
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
