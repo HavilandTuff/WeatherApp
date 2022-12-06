@@ -38,6 +38,10 @@ html, body {
 	margin-bottom: 3%;
 }
 
+.form-register {
+	width: 30%;
+}
+
 input {
 	border: none;
 	outline: none;
