@@ -29,6 +29,33 @@ html, body {
 	font-family: 'Open Sans', sans-serif;
 }
 
+.btn {
+    margin-left: 1vw;
+	height: 3vw;
+	width: 9vw;
+	border: none;
+	outline: none !important;
+	background-color: #373252;
+	color: white;
+	box-shadow: 0 0 1vw rgba(0,0,0,0.5);
+}
+
+.btn-register {
+    margin-left: 1vw;
+    margin-right: 0;
+	height: 2vw;
+	width: 6vw;
+	border: none;
+	outline: none !important;
+	background-color: #373252;
+	color: white;
+    background-color: rgba(0,0,0,0);
+}
+
+.btn:hover{
+    background: #6f65a8;
+}
+
 .form {
 	margin-top: 7%;
 	padding-left: 10%;
@@ -42,11 +69,11 @@ html, body {
 	width: 30%;
 }
 
-input {
+.city-input {
 	border: none;
 	outline: none;
 	height: 3vw;
-	width: 40vw;
+	width: 30vw;
 	padding-left: 0.5vw;
 	box-shadow: 0 0 1vw rgba(0,0,0,0.5);
 }

@@ -10,12 +10,13 @@
         {% endif %}
         {% endwith %}
         <form action="/" method="POST">
-            <input type="text" placeholder="Enter a city name" name="city_name" id="input-city">
+            <input class="city-input" type="text" placeholder="Enter a city name" name="city_name" id="input-city">
             <button type="submit" class="submit-button">Add</button>
         </form>
     </div>
     <div class="cards">
         {% if weather %}
+        {% for w in weather%}
         <div class="card night">
             <div class="delete-wrapper">
                 <form action="#" method="POST">
@@ -24,9 +25,11 @@
                 </form>
             </div>
             
-            <div class="degrees"><span>{{ weather.temp }}<span class="celsius"> °C</span></span></div>
-            <div class="state">{{ weather.state }}</div>
-            <div class="city">{{ weather.name }}</div>
+            <div class="degrees"><span>{{ w.temp }}<span class="celsius"> °C</span></span></div>
+            <div class="state">{{ w.weather }}</div>
+            <div class="city">{{ w.city }}</div>
+            </div>
+            {% endfor %}
             {% endif %}
         </div>
 {% endblock %}

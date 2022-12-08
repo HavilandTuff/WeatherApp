@@ -1,65 +1,66 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="form">
+<div class="container col-md-4">
+    <div class="form-group">
         <form method="post" action="">
             {{ form.hidden_tag() }}
-            <fieldset>
-                <legend class="border-bottom mb-4">Register Your Profile</legend>
-                <div class="form-group">
+            <fieldset class="text-light">
+                <legend class="mb-4">Register Your Profile</legend>
+                <div class="form-group mb-2">
                     {{ form.username.label }}
                     {% if form.username.errors %}
-                        {{ form.username(class="form-control-sm is-invalid") }}
+                        {{ form.username(class="form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.username.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.username(class="form control form-control-sm") }}
+                        {{ form.username(class="form-control form-control-lg") }}
                     {% endif %}                    
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-2">
                     {{ form.email.label }}
                     {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-sm is-invalid") }}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.email.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.email(class="form control form-control-sm") }}
+                        {{ form.email(class="form-control form-control-lg") }}
                     {% endif %} 
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-2">
                     {{ form.password.label }}
                     {% if form.password.errors %}
-                        {{ form.password(class="form-control form-control-sm is-invalid") }}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.password.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.password(class="form control form-control-sm") }}
+                        {{ form.password(class="form-control form-control-lg") }}
                     {% endif %} 
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-2">
                     {{ form.confirm_password.label }}
                     {% if form.confirm_password.errors %}
-                    {{ form.confirm_password(class="form-control form-control-sm is-invalid") }}
+                    {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.confirm_password.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.confirm_password(class="form control form-control-sm") }}
+                        {{ form.confirm_password(class="form-control form-control-lg") }}
                     {% endif %} 
                 </div>
             </fieldset>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
+            <div class="form-group mt-2 mb-3">
+                {{ form.submit(class="btn btn-register btn-outline-info") }}
             </div>
         </form>
     </div>
@@ -68,6 +69,7 @@
             Already have an account? <a class="ml-2" href="{{ url_for('login') }}">Login</a>
         </small>
     </div>
+</div>
 <!--
 <div class="form">
     {% with message = get_flashed_messages() %}
