@@ -38,17 +38,21 @@ def get_weathers(user):
 def add_weather(location, user):
     weather = get_weather(location)
     if weather:
-        weather_update = Weather.query.filter_by(city=weather['name'], owner_id=user.id).first()
+        weather_update = Weather.query.filter_by(city=weather['city'], owner_id=user.id).first()
         if weather_update:
             weather_update.temp = weather['temp']
             weather_update.weather = weather['weather']
             weather_update.last_update = datetime.utcnow()
             db.session.commit()
         else:
-            new_weather = Weather(city=weather['city'], weather=weather['state'], temp=weather['temp'], owner_id=user.id)
+            new_weather = Weather(city=weather['city'], weather=weather['weather'], temp=weather['temp'], owner_id=user.id)
             db.session.add(new_weather)
             db.session.commit()
 
+def delete_weather(weather_id):
+    del_weath = Weather.query.filter_by(id=weather_id).first()
+    db.session.delete(del_weath)
+    db.session.commit()
     
             
 

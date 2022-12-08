@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for
 from flask import request
-from weatherapp import app, api_queries, bcrypt, db
+from weatherapp import app, bcrypt, db, weather_queries
 from weatherapp.forms import RegistrationForm, LoginForm
 from weatherapp.models import User, Weather
 from flask_login import login_user, current_user, logout_user, login_required
@@ -53,18 +53,24 @@ def register():
 def home():
     weather = []
     if request.method == 'POST':
-        if current_user.is_authenticated:
-            api_queries.add_weather(request.form['city_name'], current_user)
-            weather = api_queries.get_weathers(current_user)
+        if current_user.is_authenticated and request.form.get('city_name'):
+            weather_queries.add_weather(request.form['city_name'], current_user)
+            weather = weather_queries.get_weathers(current_user)
             return render_template('home.html', weather=weather)
-        else:    
-            weather.append(api_queries.get_weather(request.form['city_name']))
+        elif request.form.get('id'):
+            weather_queries.delete_weather(int(request.form['id']))
+            weather = weather_queries.get_weathers(current_user)
+            return render_template('home.html', weather=weather)
+        elif request.form.get('city_name'):    
+            weather.append(weather_queries.get_weather(request.form['city_name']))
             if weather:
                 return render_template('home.html', weather=weather)
-            return render_template('home.html', weather='Not Found')
+            return render_template('home.html')
+        else:
+            return render_template('home.html')
     elif request.method == 'GET':
         if current_user.is_authenticated:
-            weather = api_queries.get_weathers(current_user)
+            weather = weather_queries.get_weathers(current_user)
             return render_template('home.html', weather=weather)
         else:
             return render_template('home.html')
