@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+#from weatherapp.main import routes
 
 
 app = Flask(__name__)
@@ -13,11 +14,16 @@ db = SQLAlchemy()
 db.init_app(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
 
 
-from weatherapp import routes, models, weather_queries
+from weatherapp import models
 with app.app_context():
     db.create_all()
 
+from weatherapp.users.routes import users
+from weatherapp.main.routes import main
+
+app.register_blueprint(users)
+app.register_blueprint(main)

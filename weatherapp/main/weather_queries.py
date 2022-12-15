@@ -2,7 +2,7 @@ import json
 import requests
 from datetime import datetime
 from weatherapp import API_KEY, db
-from weatherapp.models import Weather, User
+from weatherapp.models import Weather
 
 def get_location_cordinates(location):
     lat = None
@@ -10,7 +10,6 @@ def get_location_cordinates(location):
     city = None
     r = requests.get(f"http://api.openweathermap.org/geo/1.0/direct?q={location},PL&appid={API_KEY}")
     location_data = json.loads(r.text)
-    print(location_data)
     if location_data:
         lon = location_data[0]['lon']
         lat = location_data[0]['lat']
