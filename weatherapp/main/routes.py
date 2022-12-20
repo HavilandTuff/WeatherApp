@@ -6,8 +6,6 @@ from flask_login import current_user
 
 main = Blueprint('main', __name__)
 
-
-
 @main.route('/', methods=['GET', 'POST'])
 def home():
     weather = []

@@ -4,7 +4,6 @@ import os
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from weatherapp.config import Config
-#from weatherapp.main import routes
 
 
 app = Flask(__name__)
@@ -16,8 +15,6 @@ bcrypt = Bcrypt()
 login_manager = LoginManager()
 login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
-
-
 
 
 def create_app(config_class=Config):
