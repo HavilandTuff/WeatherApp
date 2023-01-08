@@ -4,11 +4,13 @@ from datetime import datetime
 from weatherapp import API_KEY, db
 from weatherapp.models import Weather
 
-def get_location_cordinates(location):
+def get_location_cordinates(location, country=None):
     lat = None
     lon = None
     city = None
-    r = requests.get(f"http://api.openweathermap.org/geo/1.0/direct?q={location},PL&appid={API_KEY}")
+    if not country:
+        country = 'PL'
+    r = requests.get(f"http://api.openweathermap.org/geo/1.0/direct?q={location},{country}&appid={API_KEY}")
     location_data = json.loads(r.text)
     if location_data:
         lon = location_data[0]['lon']
@@ -17,9 +19,9 @@ def get_location_cordinates(location):
     return (lat, lon, city)
     
 
-def get_weather(location=None):
+def get_weather(location=None, country=None):
     weather = None
-    lat, lon, name = get_location_cordinates(location)
+    lat, lon, name = get_location_cordinates(location, country)
     r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API_KEY}&units=metric')
     weather_json = r.text
     weather_data = json.loads(weather_json)
@@ -35,7 +37,7 @@ def get_weathers(user):
 
 
 def add_weather(location, user):
-    weather = get_weather(location)
+    weather = get_weather(location, user.country)
     if weather:
         weather_update = Weather.query.filter_by(city=weather['city'], owner_id=user.id).first()
         if weather_update:

@@ -13,6 +13,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     weathers = db.relationship('Weather', backref='owner', lazy=True)
+    country = db.Column(db.String(2))
 
     def __repr__(self) -> str:
         return f"User: {self.username}, {self.email}"
