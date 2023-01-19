@@ -34,3 +34,8 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remeber Me')
     submit = SubmitField('Login')
+
+class CityForm(FlaskForm):
+    city = StringField('', validators=[DataRequired()])
+    country = CountrySelectField()
+    submit = SubmitField('Add')

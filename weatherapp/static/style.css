@@ -1,3 +1,8 @@
+/*
+* {
+	border: 1px solid black;
+}
+*/
 .cards {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
@@ -21,12 +26,16 @@
 
 html, body {
 	min-height: 100vh;
-	background: linear-gradient(#836273, #373252);
+	background: linear-gradient(#7caef5, #373252);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	padding: 0;
 	margin: 0;
 	font-family: 'Open Sans', sans-serif;
+}
+
+.header-link:hover {
+	text-decoration: underline;
 }
 
 .btn {
@@ -73,7 +82,16 @@ html, body {
 	border: none;
 	outline: none;
 	height: 3vw;
-	width: 30vw;
+	width: 20vw;
+	padding-left: 0.5vw;
+	box-shadow: 0 0 1vw rgba(0,0,0,0.5);
+}
+
+.country-input {
+	border: none;
+	outline: none;
+	height: 3vw;
+	width: 10vw;
 	padding-left: 0.5vw;
 	box-shadow: 0 0 1vw rgba(0,0,0,0.5);
 }
@@ -183,6 +201,12 @@ html, body {
 .delete-button:focus, .delete-button:active {
 	border: none;
 	outline: none;
+}
+
+.weather-icon {
+	position: absolute;
+	top: 0;
+	right: 0%;
 }
 
 ::-webkit-scrollbar {

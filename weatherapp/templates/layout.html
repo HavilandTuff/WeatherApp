@@ -10,24 +10,29 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<div class="container">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+<div class="container border-bottom">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3">
         <div class="col-md-3"><a href="{{ url_for('main.home') }}">
             <img src="https://img.icons8.com/fluent/48/000000/rainy-weather.png">
         </a><span class="fs-4 m-lg-2">Weather App</span> </div>
-        <div class="col-md-6 align-items-center justify-content-center text-center fs-2" >
+        <div class="col-md-6 align-items-center justify-content-center text-center fs-2 fw-bold" >
             {% if current_user.is_authenticated %}
                 Welcome {{ current_user.username }}
             {% else %}
-                Welcome Stranger
-            {% endif %}</div>
+                Welcome Guest                
+            {% endif %}                        
+            <div class="fs-5 fw-normal">
+                Check weather in your favourite spots
+            </div>
+        </div>
+            
         <div class="col-md-3 align-items-end d-flex justify-content-end">
         {% if current_user.is_authenticated %}
-                <a class="nav-link fs-5 ms-2" href="{{ url_for('users.logout') }}">Logout</a>
-                <a class="nav-link fs-5 ms-2" href="{{ url_for('users.account') }}">Account</a>
+                <a class="nav-link fs-5 ms-2 header-link" href="{{ url_for('users.logout') }}">Logout</a>
+                <a class="nav-link fs-5 ms-2 header-link" href="{{ url_for('users.account') }}">Account</a>
         {% else %}
-                <a class="nav-link fs-5 ms-2" href="{{ url_for('users.login') }}">Login</a>
-                <a class="nav-link fs-5 ms-2" href="{{ url_for('users.register') }}">Register</a>
+                <a class="nav-link fs-5 ms-2 header-link" href="{{ url_for('users.login') }}">Login</a>
+                <a class="nav-link fs-5 ms-2 header-link" href="{{ url_for('users.register') }}">Register</a>
         {% endif %}
         </div>
     </header>

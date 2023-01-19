@@ -21,9 +21,10 @@ class User(db.Model, UserMixin):
 
 class Weather(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    city = db.Column(db.String, unique=True, nullable=False)
+    city = db.Column(db.String, nullable=False)
     weather = db.Column(db.String, nullable=False)
     temp = db.Column(db.Float, nullable=False)
+    country = db.Column(db.String)
     last_update = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
