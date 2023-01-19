@@ -10,7 +10,21 @@
         {% endif %}
         {% endwith %}
         <form action="/" method="POST">
-            <input class="city-input" type="text" placeholder="Enter a city name" name="city_name" id="input-city">
+            {{ form.hidden_tag() }}
+           <!-- <input class="city-input" type="text" placeholder="Enter a city name" name="city_name" id="input-city">
+            {{ form.country.label }}-->
+                    {% if form.country.errors %}
+                        {{ form.country(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.country.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.city(class="city-input", placeholder="Enter a city name", id="input-city") }}
+                        {{ form.country(class="country-input") }}
+                    {% endif %}
+            
             <button type="submit" class="submit-button">Add</button>
         </form>
     </div>
