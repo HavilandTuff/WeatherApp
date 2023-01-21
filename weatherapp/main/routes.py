@@ -8,6 +8,16 @@ import pycountry
 
 main = Blueprint('main', __name__)
 
+def initial_weathers():
+    cities = ["Berlin", "New York", "Tokyo", "Rio de Janeiro", "Addis Abeba", "Sydney"]
+    countries = ["DE", "US", "JP", "BR", "ET", "AU"]
+    weathers = []
+    for (city, country) in zip(cities, countries):
+        weather = weather_queries.get_weather(city, country)
+        weathers.append(weather)
+    return weathers
+
+
 @main.route('/', methods=['GET', 'POST'])
 def home():
     weather = []
@@ -21,21 +31,17 @@ def home():
             if current_user.is_authenticated and form.city.data:
                 weather_queries.add_weather(form.city.data, current_user, form.country.data,)
                 weather = weather_queries.get_weathers(current_user)
-                return render_template('home.html', form=form, weather=weather)
             elif request.form.get('id'):
                 weather_queries.delete_weather(int(request.form['id']))
                 weather = weather_queries.get_weathers(current_user)
-                return render_template('home.html', form=form, weather=weather)
             elif form.city.data:
                 weather.append(weather_queries.get_weather(form.city.data))
-                if weather:
-                    return render_template('home.html', form=form, weather=weather)
     elif request.method == 'GET':
         if current_user.is_authenticated:
             weather = weather_queries.get_weathers(current_user)
-            return render_template('home.html', form=form, weather=weather)
-                        
-    return render_template('home.html', form=form)
+    if not weather:
+        weather = initial_weathers()                    
+    return render_template('home.html', form=form, weather=weather)
     """
     if request.method == 'POST':
         if current_user.is_authenticated and request.form.get('city_name'):
