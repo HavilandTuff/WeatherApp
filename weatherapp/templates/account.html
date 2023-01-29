@@ -1,4 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>{{ current_user.username }}</h1>
+<div class="container col-md-4 mt-5">
+    <div class="d-flex justify-content-center"><h1>User Info</h1></div>
+    <p>Login: {{ current_user.username }}</p>
+    <p>Country: {{ current_user.country }}</p>
+    <p>Email: {{ current_user.email }}</p>
+
+</div>
 {% endblock%}
