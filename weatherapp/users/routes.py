@@ -1,5 +1,5 @@
 
-from weatherapp.users.forms import RegistrationForm, LoginForm
+from weatherapp.users.forms import RegistrationForm, LoginForm, UserUpdateForm
 from weatherapp.models import User
 from weatherapp import bcrypt, db
 from flask_login import login_user, current_user, logout_user, login_required
@@ -29,10 +29,23 @@ def logout():
     return redirect(url_for('main.home'))
 
 
-@users.route('/account')
+@users.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
-    return render_template('account.html')
+    country = current_user.country
+    form = UserUpdateForm(country=country)
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        current_user.country = form.country.data
+        db.session.commit()
+        flash("Your account has been updated!", 'success')
+        return redirect(url_for('users.account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+        form.country.data = current_user.country
+    return render_template('account.html', form=form)
 
 
 @users.route('/register', methods=['GET', 'POST'])
